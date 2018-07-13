@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Repositories\FlightRepository.cs" />
+    <Compile Remove="Repositories\IFlightRepository.cs" />
+  </ItemGroup>
+
+</Project>
