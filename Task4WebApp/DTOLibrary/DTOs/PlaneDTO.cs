@@ -11,6 +11,6 @@ namespace DTOLibrary.DTOs
 		public PlaneTypeDTO TypeOfPlane { get; set; }
 		public DateTime ReleaseDate { get; set; }
 		public TimeSpan OperationLife { get; set; }
-
+		public DateTime ExpiryDate { get; set; }
 	}
 }

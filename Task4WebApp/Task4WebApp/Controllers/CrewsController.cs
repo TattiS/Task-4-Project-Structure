@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Task4WebApp.Controllers
 {
     [Produces("application/json")]
-    [Route("api/flights/Crews")]
+    [Route("api/departures/Crews")]
     public class CrewsController : Controller
     {
 		private readonly AirportService.AirportService airport;
@@ -58,7 +58,7 @@ namespace Task4WebApp.Controllers
 		}
         
         // POST: api/Crews
-        [HttpPost("{id}")]
+        [HttpPost("/departure/{id}")]
         public IActionResult Post(int departId, [FromBody]CrewDTO value)
         {
 			try

@@ -64,9 +64,9 @@ namespace DALProject
 			new Stewardess { Id = 1, Name ="Eve", Surname="Fairy", BirthDate = DateTime.Parse("2001-06-12") },
 			new Stewardess { Id = 2, Name ="Samantha", Surname="Simson", BirthDate = DateTime.Parse("1999-12-03") },
 			new Stewardess { Id = 3, Name ="Gabrial", Surname="Fate", BirthDate = DateTime.Parse("1998-05-13")  },
-			new Stewardess { Id = 1, Name ="Hannah", Surname="Screw", BirthDate = DateTime.Parse("1993-07-08") },
-			new Stewardess { Id = 2, Name ="Jennah", Surname="Johns", BirthDate = DateTime.Parse("1996-04-03") },
-			new Stewardess { Id = 3, Name ="Ivory", Surname="Rocket", BirthDate = DateTime.Parse("1992-08-19")  }
+			new Stewardess { Id = 4, Name ="Hannah", Surname="Screw", BirthDate = DateTime.Parse("1993-07-08") },
+			new Stewardess { Id = 5, Name ="Jennah", Surname="Johns", BirthDate = DateTime.Parse("1996-04-03") },
+			new Stewardess { Id = 6, Name ="Ivory", Surname="Rocket", BirthDate = DateTime.Parse("1992-08-19")  }
 		};
 
 		private IEnumerable<PlaneType> planeTypes = new List<PlaneType> {
