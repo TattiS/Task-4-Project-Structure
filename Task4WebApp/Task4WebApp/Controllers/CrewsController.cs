@@ -58,7 +58,7 @@ namespace Task4WebApp.Controllers
 		}
         
         // POST: api/Crews
-        [HttpPost("/departure/{id}")]
+        [HttpPost("departure-id/{id}")]
         public IActionResult Post(int departId, [FromBody]CrewDTO value)
         {
 			try
@@ -69,7 +69,7 @@ namespace Task4WebApp.Controllers
 
 					return Ok();
 				}
-				return BadRequest();
+				return BadRequest(ModelState);
 			}
 			catch (System.Exception ex)
 			{
@@ -87,11 +87,11 @@ namespace Task4WebApp.Controllers
 				if (ModelState.IsValid)
 				{
 					value.Id = id;
-					//airport.UpdateCrew(value);
+					airport.UpdateCrew(value);
 
 					return Ok();
 				}
-				return BadRequest();
+				return BadRequest(ModelState);
 			}
 			catch (System.Exception ex)
 			{
@@ -102,8 +102,18 @@ namespace Task4WebApp.Controllers
         
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-        }
+			try
+			{
+				airport.DeleteCrew(id);
+				return Ok();
+			}
+			catch (System.Exception ex)
+			{
+
+				return BadRequest(ex.Message);
+			}
+		}
     }
 }

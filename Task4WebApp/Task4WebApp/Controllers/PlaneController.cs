@@ -9,24 +9,24 @@ using Microsoft.AspNetCore.Mvc;
 namespace Task4WebApp.Controllers
 {
     [Produces("application/json")]
-    [Route("api/PlaneTypes")]
-    public class PlaneTypesController : Controller
+    [Route("api/Planes")]
+    public class PlaneController : Controller
     {
 		private readonly AirportService.AirportService airport;
 
-		public PlaneTypesController(AirportService.AirportService service)
+		public PlaneController(AirportService.AirportService service)
 		{
 			this.airport = service;
 
 		}
 
-		// GET: api/PlaneTypes
+		// GET: api/Plane
 		[HttpGet]
         public IActionResult Get()
         {
 			try
 			{
-				var result = airport.GetPlaneTypes();
+				var result = airport.GetPlanes();
 				if (result == null)
 				{
 					return NotFound();
@@ -40,18 +40,18 @@ namespace Task4WebApp.Controllers
 			}
 		}
 
-        // GET: api/PlaneTypes/5
+        // GET: api/Plane/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
 			try
 			{
-				var type = this.airport.GetPlaneTypeById(id);
-				if (type == null)
+				var plane = this.airport.GetPlaneById(id);
+				if (plane == null)
 				{
 					return NotFound();
 				}
-				return Ok(type);
+				return Ok(plane);
 			}
 			catch (System.Exception ex)
 			{
@@ -60,15 +60,15 @@ namespace Task4WebApp.Controllers
 			}
 		}
         
-        // POST: api/PlaneTypes
-        [HttpPost]
-        public IActionResult Post([FromBody]PlaneTypeDTO value)
+        // POST: api/Plane
+        [HttpPost("departure-id/{id}")]
+        public IActionResult Post(int departId,[FromBody]PlaneDTO value)
         {
 			try
 			{
 				if (ModelState.IsValid)
 				{
-					airport.CreatePlaneType(value);
+					airport.CreatePlane(departId,value);
 
 					return Ok();
 				}
@@ -81,16 +81,16 @@ namespace Task4WebApp.Controllers
 			}
 		}
         
-        // PUT: api/PlaneTypes/5
+        // PUT: api/Plane/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]PlaneTypeDTO value)
+        public IActionResult Put(int id, [FromBody]PlaneDTO value)
         {
 			try
 			{
 				if (ModelState.IsValid)
 				{
 					value.Id = id;
-					airport.UpdateType(value);
+					airport.UpdatePlane(value);
 
 					return Ok();
 				}
@@ -109,7 +109,7 @@ namespace Task4WebApp.Controllers
         {
 			try
 			{
-				airport.DeletePlaneType(id);
+				airport.DeletePlane(id);
 				return Ok();
 			}
 			catch (System.Exception ex)

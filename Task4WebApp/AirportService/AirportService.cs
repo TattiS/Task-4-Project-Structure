@@ -39,50 +39,41 @@ namespace AirportService
 
 		#region flights
 
-		//GET: /api/flights
 		public List<FlightDTO> GetFlights()
 		{
 			List<Flight> result = unitOfWork.FlightRepository.GetAll();
 			return mapper.Map<List<Flight>,List<FlightDTO>>(result);
 		}
-		//GET: /api/flights/:id
 		public FlightDTO GetFlightById(int id)
 		{
 			FlightDTO result;
 			result = mapper.Map<Flight,FlightDTO>(unitOfWork.FlightRepository.GetById(id));
 			return result;
 		}
-
-		//GET: /api/flights/:departure-point
 		public List<FlightDTO> GetFlightsByPoint(string departurePoint)
 		{
 			List<FlightDTO> result;
 			result = mapper.Map<List<Flight>, List<FlightDTO>>(unitOfWork.FlightRepository.GetBy(f => f.DeparturePoint == departurePoint));
 			return result;
 		}
-		//GET: /api/flights/:departure-time
 		public List<FlightDTO> GetFlightsByDeparture(DateTime time)
 		{
 			List<FlightDTO> result;
 			result = mapper.Map<List<Flight>, List<FlightDTO>>(unitOfWork.FlightRepository.GetBy(f => f.DepartureTime == time));
 			return result;
 		}
-		//GET: /api/flights/:destination
 		public List<FlightDTO> GetFlightsByDestination(string destination)
 		{
 			List<FlightDTO> result;
 			result = mapper.Map<List<Flight>, List<FlightDTO>>(unitOfWork.FlightRepository.GetBy(f => f.Destination == destination));
 			return result;
 		}
-		//GET: /api/flights/:arrival-time
 		public List<FlightDTO> GetFlightsByArrival(DateTime time)
 		{
 			List<FlightDTO> result;
 			result = mapper.Map<List<Flight>, List<FlightDTO>>(unitOfWork.FlightRepository.GetBy(f => f.ArrivalTime == time));
 			return result;
 		}
-		//POST: /api/flights/
-		//BODY:{ departurePoint: string, departureTime: DateTime, destination: string, arrivalTime: DateTime, ticketItem: List<Ticket>}
 		public void CreateFlight(FlightDTO flight)
 		{
 			if (flight == null)
@@ -91,8 +82,6 @@ namespace AirportService
 				unitOfWork.FlightRepository.Create(newFlight);
 			}
 		}
-		//PUT: /api/flights/:id
-		//BODY:{ id: int, departurePoint: string, departureTime: DateTime, destination: string, arrivalTime: DateTime, ticketItem: List<Ticket >}
 		public void UpdateFlight(FlightDTO flight)
 		{
 			if(flight != null)
@@ -101,7 +90,6 @@ namespace AirportService
 				unitOfWork.FlightRepository.Insert(insertingFlight);
 			}
 		}
-		//DELETE: /api/flights/:id
 		public void DeleteFlight(int id)
 		{
 			Flight flightToDelete = unitOfWork.FlightRepository.GetById(id);
@@ -115,20 +103,18 @@ namespace AirportService
 		}
 
 		#endregion flights
+
 		#region departures
-		//		GET: /api/departures
 		public List<DepartureDTO> GetDepartures()
 		{
 			List<Departure> result = unitOfWork.DepartureRepository.GetAll();
 			return mapper.Map<List<Departure>, List<DepartureDTO>>(result);
 		}
-		//GET: /api/departures/:id
 		public DepartureDTO GetDepartureById(int id)
 		{
 			Departure departure = unitOfWork.DepartureRepository.GetById(id);
 			return mapper.Map<Departure, DepartureDTO>(departure);
 		}
-		//POST: /api/departures
 		public void CreateDeparture(DepartureDTO departure)
 		{
 			if (departure != null)
@@ -137,7 +123,6 @@ namespace AirportService
 				unitOfWork.DepartureRepository.Insert(newDepart);
 			}
 		}
-		//	PUT: /api/departures/:id
 		public void UpdateDeparture(DepartureDTO departure)
 		{
 			if (departure != null)
@@ -146,7 +131,6 @@ namespace AirportService
 				unitOfWork.DepartureRepository.Insert(updatedDepart);
 			}
 		}
-		//	DELETE: /api/departures/:id
 		public void DeleteDeparture(int id)
 		{
 			if (unitOfWork.DepartureRepository.GetById(id) != null)
@@ -156,25 +140,18 @@ namespace AirportService
 			
 		}
 		#endregion
+
 		#region stewardesses
-		//		GET: /api/stewardesses
 		public List<StewardessDTO> GetStewardesses()
 		{
 			List<Stewardess> stewardesses = unitOfWork.StewardessRepository.GetAll();
 			return mapper.Map<List<Stewardess>, List<StewardessDTO>>(stewardesses);
 		}
-		//	GET: /api/stewardesses/:id
 		public StewardessDTO GetStewardessById(int id)
 		{
 			Stewardess stewardess = unitOfWork.StewardessRepository.GetById(id);
 			return mapper.Map<Stewardess, StewardessDTO>(stewardess);
 		}
-		//	GET: /api/stewardesses/:name
-		//	GET: /api/stewardesses/:surname
-		//	GET: /api/stewardesses/:birth-date
-
-		//	POST: /api/stewardesses
-		//	BODY
 		public void CreateStewardess(StewardessDTO stewardess)
 		{
 			if(stewardess != null)
@@ -183,14 +160,6 @@ namespace AirportService
 				unitOfWork.StewardessRepository.Create(newStewardess);
 			}
 		}
-		//	PUT: /api/stewardesses/:id
-		//BODY
-		//	{
-		//		id:int,
-		//name: string,
-		//surname: string,
-		//birthDate: DateTime
-		//	}
 		public void UpdateStewardess(StewardessDTO stewardess)
 		{
 			if (stewardess != null)
@@ -200,7 +169,6 @@ namespace AirportService
 			}
 
 		}
-		//	DELETE: api/stewardesses/:id
 		public void DeleteStewardess(int id)
 		{
 			Stewardess stewardessToDelete = unitOfWork.StewardessRepository.GetById(id);
@@ -211,27 +179,18 @@ namespace AirportService
 			}
 		}
 		#endregion
+
 		#region pilots
-		//		GET: /api/pilots
 		public List<PilotDTO> GetPilots()
 		{
 			List<Pilot> pilots = unitOfWork.PilotRepository.GetAll();
 			return mapper.Map<List<Pilot>, List<PilotDTO>>(pilots);
 		}
-		//GET: /api/pilots/:id
 		public PilotDTO GetPilotById(int id)
 		{
 			Pilot pilot = unitOfWork.PilotRepository.GetById(id);
 			return mapper.Map<Pilot, PilotDTO>(pilot);
 		}
-
-		//GET: /api/pilots/:name
-		//GET: /api/pilots/:surname
-		//GET: /api/pilots/:birth-date
-		//GET: /api/pilots/:experience
-
-		//POST: api/pilots
-		//BODY
 		public void CreatePilot(PilotDTO pilot)
 		{
 			if (pilot != null)
@@ -240,9 +199,6 @@ namespace AirportService
 				unitOfWork.PilotRepository.Create(newPilot);
 			}
 		}
-
-		//	PUT: api/pilots/:id
-		//	BODY
 		public void UpdatePilot(PilotDTO pilot)
 		{
 			if (pilot != null)
@@ -253,7 +209,6 @@ namespace AirportService
 
 		}
 
-		//	DELETE: api/pilots/:id
 		public void DeletePilot(int id)
 		{
 			Pilot pilotToDelete = unitOfWork.PilotRepository.GetById(id);
@@ -265,26 +220,18 @@ namespace AirportService
 		}
 
 		#endregion
+
 		#region plane-types
-		//		GET: /api/plane-types
 		public List<PlaneTypeDTO> GetPlaneTypes()
 		{
 			List<PlaneType> planeTypes = unitOfWork.TypeRepository.GetAll();
 			return mapper.Map<List<PlaneType>, List<PlaneTypeDTO>>(planeTypes);
 		}
-		//GET: /api/plane-types/:id
 		public PlaneTypeDTO GetPlaneTypeById(int id)
 		{
 			PlaneType type = unitOfWork.TypeRepository.GetById(id);
 			return mapper.Map<PlaneType, PlaneTypeDTO>(type);
 		}
-
-		//GET: /api/plane-types/model/:model
-		//GET: /api/plane-types/:seats
-		//GET: /api/plane-types/:airlift
-
-		//POST: /api/plane-types
-		//BODY
 		public void CreatePlaneType(PlaneTypeDTO planeType)
 		{
 			if (planeType != null)
@@ -294,8 +241,6 @@ namespace AirportService
 			}
 		}
 
-		//	PUT: /api/plane-types/:id
-		//	BODY
 		public void UpdateType(PlaneTypeDTO planeType)
 		{
 			if (planeType != null)
@@ -306,7 +251,6 @@ namespace AirportService
 
 		}
 
-		//	DELETE: /api/plane-types/:id
 		public void DeletePlaneType(int id)
 		{
 			PlaneType typeToDelete = unitOfWork.TypeRepository.GetById(id);
@@ -317,14 +261,31 @@ namespace AirportService
 		}
 
 		#endregion
-		#region ticket
-		//		GET: /api/flights/:id/ticket
-		public IEnumerable<TicketDTO> GetTicketsByFlightId(int flightId)
-		{
-			IEnumerable<Ticket> tickets = unitOfWork.FlightRepository.GetById(flightId).Tickets;
-			return mapper.Map<IEnumerable<Ticket>, IEnumerable<TicketDTO>>(tickets);
-		}
 
+		#region ticket
+		public List<TicketDTO> GetTickets()
+		{
+			List<Flight> flights = unitOfWork.FlightRepository.GetAll().FindAll(p => p.Tickets != null && p.Tickets.Count>0);
+			if (flights != null && flights.Count > 0)
+			{
+				var tickets = new List<Ticket>();
+				foreach (var item in flights)
+				{
+					tickets.AddRange(item.Tickets);
+				}
+				return mapper.Map<List<Ticket>, List<TicketDTO>>(tickets);
+			}
+			else
+			{
+				throw new Exception("Error: There are no tickets.");
+			}
+
+		}
+		public List<TicketDTO> GetTicketsByFlightId(int flightId)
+		{
+			List<Ticket> tickets = unitOfWork.FlightRepository.GetById(flightId).Tickets;
+			return mapper.Map<List<Ticket>, List<TicketDTO>>(tickets);
+		}
 		public void CreateTicket(int flightId, TicketDTO value)
 		{
 			var tickets = unitOfWork.FlightRepository.GetById(flightId).Tickets;
@@ -342,7 +303,40 @@ namespace AirportService
 				throw new Exception("Error: Can't find such flight!");
 			}
 		}
-
+		public void UpdateTicket(TicketDTO value)
+		{
+			if (value != null)
+			{
+				Ticket changedTicket = mapper.Map<TicketDTO, Ticket>(value);
+				var tickets = unitOfWork.FlightRepository.GetById(value.FlightId).Tickets;
+				var ticket = tickets.Find(k => k.Id == value.Id);
+				if (ticket != null)
+				{
+					tickets.Remove(ticket);
+					tickets.Add(changedTicket);
+				}
+				else
+				{
+					throw new Exception("Error: There is no such ticket in this flight.");
+				}
+ 			}
+			else
+			{
+				throw new ArgumentNullException();
+			}
+		}
+		public void DeleteTicket(int id)
+		{
+			var tickets = unitOfWork.FlightRepository.GetAll().Find(p => p.Tickets.Exists(i => i.Id == id)).Tickets;
+			if (tickets != null && tickets.Count > 0)
+			{
+				tickets.RemoveAll(p => p.Id == id);
+			}
+			else
+			{
+				throw new Exception("Error: There is no the ticket with such id.");
+			}
+		}
 		#endregion
 
 		#region crew
@@ -383,37 +377,99 @@ namespace AirportService
 				throw new Exception("Error: Can't find such departure!");
 			}
 		}
+		public void UpdateCrew(CrewDTO value)
+		{
+			if (value != null)
+			{
+				Crew newCrew = mapper.Map<CrewDTO, Crew>(value);
+				unitOfWork.DepartureRepository.GetBy(p => p.CrewItem.Id.Equals(value.Id)).ForEach(c => c.CrewItem = newCrew);
+			}
+			else
+			{
+				throw new ArgumentNullException();
+			}
+		}
+
+		public void DeleteCrew(int id)
+		{
+			var itemsToDelete = unitOfWork.DepartureRepository.GetAll().FindAll(p=>p.CrewItem.Id == id);
+			if (itemsToDelete != null && itemsToDelete.Count>0)
+			{
+				unitOfWork.DepartureRepository.DeleteAll(p=>p.CrewItem.Id==id);
+			}
+			else
+			{
+				throw new Exception("Can't find such crew!");
+			}
+		}
 		#endregion
+
 		#region plane
-		//		GET: /api/departures/:id/plane
-		//GET: /api/departures/:plane-id
-		//GET: /api/departures/:plane-type-id
-		//GET: /api/departures/:plane-type-model
-		//GET: /api/departures/:plane-type-seats
-		//GET: /api/departures/:plane-type-airlift
-		//GET: /api/departures/:plane-release
-		//GET: /api/departures/:plane-operation-life
+		public List<PlaneDTO> GetPlanes()
+		{
+			var departures = unitOfWork.DepartureRepository.GetBy(p=>p.PlaneItem != null);
+			List<Plane> planes = new List<Plane>();
+			if (departures != null && departures.Count > 0)
+			{
+				foreach (var item in departures)
+				{
+					planes.Add(item.PlaneItem);
+				}
+				return mapper.Map<List<Plane>, List<PlaneDTO>>(planes);
+			}
+			else
+			{
+				throw new Exception("Error: There isn't any plane.");
+			}
+			
+		}
+		public PlaneDTO GetPlaneById(int id)
+		{
+			return GetPlanes().Find(p => p.Id == id);
+		}
+		public void CreatePlane(int departId, PlaneDTO value)
+		{
+			var departure = unitOfWork.DepartureRepository.GetById(departId);
+			if (departure != null)
+			{
+				var plane = mapper.Map<PlaneDTO, Plane>(value);
+				if (plane == null)
+				{
+					throw new Exception("Error: Can't add this crew to the the departure!");
+				}
+				departure.PlaneItem = plane;
+			}
+			else
+			{
+				throw new Exception("Error: Can't find such departure!");
+			}
+		}
 
-		//POST: /api/departures/:id/plane
-		//BODY
-		//		{
-		//			name: string,
-		//typeOfPlane: PlaneType,
-		//releaseDate: DateTime,
-		//operationLife: TimeSpan
-		//	}
-		//	PUT: /api/departures/:plane-id
-		//	BODY
-		//	{
-		//		id: int,
-		//name: string,
-		//typeOfPlane: PlaneType,
-		//releaseDate: DateTime,
-		//operationLife: TimeSpan
-		//	}
+		public void UpdatePlane(PlaneDTO value)
+		{
+			if (value != null)
+			{
+				Plane newPlane = mapper.Map<PlaneDTO, Plane>(value);
+				unitOfWork.DepartureRepository.GetBy(p => p.CrewItem.Id.Equals(value.Id)).ForEach(c => c.PlaneItem = newPlane);
+			}
+			else
+			{
+				throw new ArgumentNullException();
+			}
+		}
 
-		//	DELETE: /api/departures/:id/plane
-
+		public void DeletePlane(int id)
+		{
+			var itemsToDelete = unitOfWork.DepartureRepository.GetAll().FindAll(p => p.PlaneItem.Id == id);
+			if (itemsToDelete != null && itemsToDelete.Count > 0)
+			{
+				unitOfWork.DepartureRepository.DeleteAll(p => p.PlaneItem.Id == id);
+			}
+			else
+			{
+				throw new Exception("Can't find such plane!");
+			}
+		}
 		#endregion
 	}
 }

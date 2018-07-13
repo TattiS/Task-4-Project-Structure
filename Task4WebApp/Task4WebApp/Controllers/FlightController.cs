@@ -72,7 +72,7 @@ namespace Task4WebApp.Controllers
 				
 					return Ok();
 				}
-				return BadRequest();
+				return BadRequest(ModelState);
 			}
 			catch (System.Exception ex)
 			{
@@ -96,7 +96,7 @@ namespace Task4WebApp.Controllers
 
 					return Ok();
 				}
-				return BadRequest();
+				return BadRequest(ModelState);
 			}
 			catch (System.Exception ex)
 			{

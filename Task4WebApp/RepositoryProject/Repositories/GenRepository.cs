@@ -106,10 +106,7 @@ namespace DALProject.Repositories
 			throw new System.NotImplementedException();
 		}
 
-		public IEnumerable<TEntity> Get()
-		{
-			return dataSet;
-		}
+		
 	}
 
 }

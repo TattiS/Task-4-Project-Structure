@@ -9,24 +9,24 @@ using Microsoft.AspNetCore.Mvc;
 namespace Task4WebApp.Controllers
 {
     [Produces("application/json")]
-    [Route("api/PlaneTypes")]
-    public class PlaneTypesController : Controller
+    [Route("api/Tickets")]
+    public class TicketsController : Controller
     {
 		private readonly AirportService.AirportService airport;
 
-		public PlaneTypesController(AirportService.AirportService service)
+		public TicketsController(AirportService.AirportService service)
 		{
 			this.airport = service;
 
 		}
 
-		// GET: api/PlaneTypes
+		// GET: api/Tickets
 		[HttpGet]
         public IActionResult Get()
         {
 			try
 			{
-				var result = airport.GetPlaneTypes();
+				var result = airport.GetTickets();
 				if (result == null)
 				{
 					return NotFound();
@@ -40,18 +40,18 @@ namespace Task4WebApp.Controllers
 			}
 		}
 
-        // GET: api/PlaneTypes/5
-        [HttpGet("{id}")]
+        // GET: api/Tickets/5
+        [HttpGet("flight-id/{id}")]
         public IActionResult Get(int id)
         {
 			try
 			{
-				var type = this.airport.GetPlaneTypeById(id);
-				if (type == null)
+				var ticket = this.airport.GetTicketsByFlightId(id);
+				if (ticket == null)
 				{
 					return NotFound();
 				}
-				return Ok(type);
+				return Ok(ticket);
 			}
 			catch (System.Exception ex)
 			{
@@ -60,19 +60,19 @@ namespace Task4WebApp.Controllers
 			}
 		}
         
-        // POST: api/PlaneTypes
+        // POST: api/Tickets
         [HttpPost]
-        public IActionResult Post([FromBody]PlaneTypeDTO value)
+        public IActionResult Post([FromBody]TicketDTO value)
         {
 			try
 			{
 				if (ModelState.IsValid)
 				{
-					airport.CreatePlaneType(value);
+					airport.CreateTicket(value.FlightId, value);
 
 					return Ok();
 				}
-				return BadRequest(ModelState);
+				return BadRequest();
 			}
 			catch (System.Exception ex)
 			{
@@ -81,20 +81,20 @@ namespace Task4WebApp.Controllers
 			}
 		}
         
-        // PUT: api/PlaneTypes/5
+        // PUT: api/Tickets/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]PlaneTypeDTO value)
+        public IActionResult Put(int id, [FromBody]TicketDTO value)
         {
 			try
 			{
 				if (ModelState.IsValid)
 				{
 					value.Id = id;
-					airport.UpdateType(value);
+					airport.UpdateTicket(value);
 
 					return Ok();
 				}
-				return BadRequest(ModelState);
+				return BadRequest();
 			}
 			catch (System.Exception ex)
 			{
@@ -109,7 +109,7 @@ namespace Task4WebApp.Controllers
         {
 			try
 			{
-				airport.DeletePlaneType(id);
+				airport.DeleteTicket(id);
 				return Ok();
 			}
 			catch (System.Exception ex)
