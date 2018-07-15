@@ -450,7 +450,7 @@ namespace AirportService
 			if (value != null)
 			{
 				Plane newPlane = mapper.Map<PlaneDTO, Plane>(value);
-				unitOfWork.DepartureRepository.GetBy(p => p.CrewItem.Id.Equals(value.Id)).ForEach(c => c.PlaneItem = newPlane);
+				unitOfWork.DepartureRepository.GetBy(p => p.PlaneItem.Id.Equals(value.Id)).ForEach(c => c.PlaneItem = newPlane);
 			}
 			else
 			{
